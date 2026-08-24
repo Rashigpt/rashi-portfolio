@@ -6,7 +6,7 @@ export default function Home() {
           Frontend Developer
         </p>
         <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
-          Rashi
+          Rashi Gupta
         </h1>
         <p className="max-w-lg text-lg leading-8 text-muted-foreground">
           I build clean, fast, user-focused web experiences.
