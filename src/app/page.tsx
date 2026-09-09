@@ -46,7 +46,7 @@ export default function Home() {
               className="lowercase text-white italic"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
             >
-              Craft
+              Develop
             </span>
           </div>
 
