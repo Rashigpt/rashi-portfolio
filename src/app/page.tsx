@@ -46,7 +46,7 @@ export default function Home() {
               className="lowercase text-white italic"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
             >
-              Develop
+              Develop 
             </span>
           </div>
 
@@ -63,8 +63,7 @@ export default function Home() {
 
           <p className="max-w-md text-lg leading-8 text-white/70">
             Rashi is a Frontend Developer building clean, fast, user-focused
-            web experiences. Every project starts the same way: a blank
-            canvas, a clear plan, and the patience to see it through.
+            web experiences. Every project starts the same way: a planned design, a clear plan, and the patience to see it through.
           </p>
 
           <Button
