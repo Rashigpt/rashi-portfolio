@@ -57,7 +57,7 @@ export default function Home() {
               className="block text-[#FB9590] italic"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
             >
-              built one line at a time.
+              built one line at a time carefully.
             </span>
           </h1>
 
