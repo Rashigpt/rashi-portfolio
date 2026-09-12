@@ -70,7 +70,7 @@ export default function Home() {
             size="lg"
             className="w-fit gap-2 rounded-full bg-white px-6 text-black hover:bg-white/85"
           >
-            View My Work
+            View My Work here
             <ArrowRight className="size-4" />
           </Button>
         </div>
