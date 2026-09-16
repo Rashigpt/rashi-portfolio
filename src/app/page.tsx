@@ -42,6 +42,7 @@ export default function Home() {
           <div className="flex items-center gap-2 text-sm font-medium tracking-wide text-[#FFBB94] uppercase">
             <span className="text-[#FB9590]">◆</span>
             <span>Code,Implement , Design &amp;</span>
+            <span>Code,Implement , Design &amp;</span>
             <span
               className="lowercase text-white italic"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
