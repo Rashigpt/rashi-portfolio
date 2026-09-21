@@ -112,6 +112,9 @@ export default function Home() {
                 </span>
                 et&apos;s Work
                 <span className="block">Together</span>
+                
+                <span className="block">Together</span>
+
               </h2>
               <p className="mt-6 max-w-xs text-white/60">
                 Building clean, fast, user-focused web experiences with
