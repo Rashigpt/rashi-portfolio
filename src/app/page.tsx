@@ -142,7 +142,11 @@ export default function Home() {
             </div>
 
             <p className="text-lg leading-8 text-white/80">
-              I specialize in full-stack development with a focus on the{" "}
+              With{" "}
+              <span className="font-semibold text-white">
+                1+ year of hands-on experience
+              </span>
+              , I specialize in full-stack development with a focus on the{" "}
               <span className="font-semibold text-white">MERN stack</span>{" "}
               (MongoDB, Express.js, React.js, Node.js). With expertise in{" "}
               <span className="font-semibold text-white">web hosting</span>,{" "}
