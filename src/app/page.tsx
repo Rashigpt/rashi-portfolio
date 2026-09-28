@@ -5,6 +5,7 @@ import {
   Boxes,
   Cloud,
   Code2,
+  GraduationCap,
   Mail,
   MapPin,
   Phone,
@@ -214,6 +215,11 @@ export default function Home() {
 
             <p className="text-xl font-semibold text-white/90">
               Frontend Developer
+            </p>
+
+            <p className="flex items-center gap-2 text-sm text-white/60">
+              <GraduationCap className="size-4 shrink-0" />
+              MIET, Meerut
             </p>
 
             <p className="text-lg text-white/80">
