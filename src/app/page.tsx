@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import {
   ArrowRight,
   ArrowUp,
   ArrowUpRight,
+  Bot,
   Boxes,
   Cloud,
   Code2,
@@ -28,6 +32,167 @@ const specialties = [
   { title: "RESTful API Development", icon: Webhook },
 ];
 
+const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+
+const skills = [
+  { name: "ReactJS", icon: "react/react-original.svg" },
+  { name: "ExpressJS", icon: "express/express-original.svg", invert: true },
+  { name: "NodeJS", icon: "nodejs/nodejs-original.svg" },
+  { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
+  { name: "Mongoose", icon: "mongoose/mongoose-original.svg" },
+  { name: "Redux", icon: "redux/redux-original.svg" },
+  { name: "NextJS", icon: "nextjs/nextjs-original.svg", invert: true },
+  { name: "React Native", icon: "react/react-original.svg" },
+  { name: "JavaScript", icon: "javascript/javascript-original.svg" },
+  { name: "TypeScript", icon: "typescript/typescript-original.svg" },
+  { name: "HTML", icon: "html5/html5-original.svg" },
+  { name: "CSS", icon: "css3/css3-original.svg" },
+  { name: "SCSS", icon: "sass/sass-original.svg" },
+  { name: "Tailwind CSS", icon: "tailwindcss/tailwindcss-original.svg" },
+  { name: "Bootstrap", icon: "bootstrap/bootstrap-original.svg" },
+  { name: "Material UI", icon: "materialui/materialui-original.svg" },
+  { name: "Apollo Client", icon: "apollographql/apollographql-original.svg", invert: true },
+  { name: "Git", icon: "git/git-original.svg" },
+  { name: "GitHub", icon: "github/github-original.svg", invert: true },
+  { name: "GitLab", icon: "gitlab/gitlab-original.svg" },
+  { name: "Bitbucket", icon: "bitbucket/bitbucket-original.svg" },
+  { name: "AWS (S3, EC2)", icon: "amazonwebservices/amazonwebservices-plain-wordmark.svg", invert: true },
+  { name: "Figma", icon: "figma/figma-original.svg" },
+];
+
+const tools: { name: string; icon?: string }[] = [
+  { name: "Postman", icon: "postman/postman-original.svg" },
+  { name: "Ubuntu", icon: "ubuntu/ubuntu-original.svg" },
+  { name: "VS Code", icon: "vscode/vscode-original.svg" },
+  { name: "ChatGPT" },
+];
+
+const experience = [
+  {
+    period: "May 2026 – Present",
+    org: "Wombto18",
+    title: "Software Developer",
+    bullets: [] as string[],
+  },
+  {
+    period: "Apr 2025 – Jun 2025",
+    org: "Dfree Novelish Pvt. Ltd. · Amroha, Uttar Pradesh",
+    title: "Technical Operation Executive Intern",
+    bullets: [
+      "Built and maintained React.js-based web application features, improving UI usability and frontend performance within a professional product team.",
+      "Integrated JavaScript and SQL-driven data flows into the frontend, ensuring seamless data display and smooth user interactions.",
+      "Collaborated with team members on operational workflows, applying problem-solving skills to resolve day-to-day technical issues quickly.",
+    ],
+  },
+];
+
+const education = [
+  {
+    period: "Nov 2021 – Jul 2025",
+    org: "Meerut Institute of Engineering and Technology (AKTU) · Meerut, India",
+    title: "Bachelor of Technology – Computer Science and Engineering",
+    meta: "CGPA: 7.5",
+  },
+  {
+    period: "2021",
+    org: "IIMT Academy · Meerut, India",
+    title: "Class XII (Senior Secondary) – PCM",
+    meta: "96%",
+  },
+];
+
+const certifications = [
+  {
+    title: "AWS Certified Cloud Practitioner (CLF-C02)",
+    issuer: "Amazon Web Services",
+  },
+  {
+    title: "Data Structures and Algorithms using Java",
+    issuer: "NPTEL, IIT Kharagpur",
+  },
+];
+
+const extraSkillGroups = [
+  {
+    category: "Communication Systems",
+    items: [
+      "MSG91",
+      "DLT Template Registration",
+      "WhatsApp / SMS / Email Templates",
+      "OTP & Notification Workflows",
+    ],
+  },
+  {
+    category: "Quality & Documentation",
+    items: [
+      "Website QC / Manual Testing",
+      "QC Documentation",
+      "User Flow Documentation",
+      "Product & Project Documentation",
+    ],
+  },
+  {
+    category: "Content & Design",
+    items: [
+      "Content Writing",
+      "Script Writing",
+      "Sales Toolkit Creation",
+      "Canva (Brochures, PPTs)",
+    ],
+  },
+  {
+    category: "Video & Audio",
+    items: ["User Flow Videos", "ElevenLabs (AI Voiceovers)"],
+  },
+  {
+    category: "Marketing",
+    items: [
+      "Social Media Marketing",
+      "Google Pomelli (Social Post & Image Editing)",
+    ],
+  },
+  {
+    category: "Soft Skills",
+    items: ["Presentation & Public Speaking"],
+  },
+];
+
+const resumeTabs = [
+  {
+    id: "experience",
+    label: "Work Experience",
+    heading: "Experience",
+    description:
+      "An overview of my roles and the impact I've made so far.",
+  },
+  {
+    id: "aboutme",
+    label: "About Me",
+    heading: "About Me",
+    description: "A quick introduction to who I am and how I work.",
+  },
+  {
+    id: "education",
+    label: "Education",
+    heading: "Education",
+    description: "My academic background.",
+  },
+  {
+    id: "extraSkills",
+    label: "Extra Skills",
+    heading: "Cross-Functional Skills",
+    description: "Skills beyond core development that I bring to a team.",
+  },
+  {
+    id: "certifications",
+    label: "Certifications",
+    heading: "Certifications",
+    description: "Courses and certifications I've completed.",
+  },
+] as const;
+
+type ResumeTabId = (typeof resumeTabs)[number]["id"];
+
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
@@ -45,6 +210,9 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<ResumeTabId>("experience");
+  const activeTabData = resumeTabs.find((tab) => tab.id === activeTab)!;
+
   return (
     <div
       id="top"
@@ -194,82 +362,172 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="border-t border-white/10">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-24 lg:grid-cols-2 lg:px-12">
-          <div
-            aria-hidden
-            className="mx-auto aspect-4/5 w-full max-w-sm rounded-[2rem] border border-dashed border-white/15 bg-white/5"
-          />
-
-          <div className="flex flex-col gap-6">
-            <span className="text-sm font-medium tracking-wide text-[#FFBB94] uppercase">
-              Hello, I&apos;m
+      <section id="about" className="border-t border-white/10 bg-white text-black">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-[380px_1fr] lg:px-12">
+          <div>
+            <span className="text-sm font-medium tracking-wide text-[#A33757] uppercase">
+              Resume
             </span>
-
-            <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h2 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
               <span className="mr-1 inline-flex size-10 items-center justify-center rounded-full bg-[#FB9590] text-2xl font-bold text-black">
-                R
+                A
               </span>
-              ashi Gupta
+              ll over my details find here...
             </h2>
 
-            <p className="text-xl font-semibold text-white/90">
-              Frontend Developer
-            </p>
-
-            <p className="flex items-center gap-2 text-sm text-white/60">
-              <GraduationCap className="size-4 shrink-0" />
-              MIET, Meerut
-            </p>
-
-            <p className="text-lg text-white/80">
-              Tech Stack -{" "}
-              <span className="font-semibold text-white">
-                React, Next.js &amp; TypeScript
-              </span>
-            </p>
-
-            <p className="max-w-xl leading-7 text-white/70">
-              I&apos;m a skilled software developer with experience in
-              JavaScript, and expertise in frameworks like React, Node.js,
-              Express.js and MongoDB. I&apos;m a quick learner and
-              collaborate closely with clients to create efficient,
-              scalable, and user-friendly solutions that solve real-world
-              problems. Let&apos;s work together to bring your ideas to
-              life!
-            </p>
-
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <p className="text-3xl font-semibold sm:text-4xl">1+</p>
-                <p className="mt-1 text-sm text-white/60">
-                  Years of Experience
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold sm:text-4xl">5+</p>
-                <p className="mt-1 text-sm text-white/60">
-                  Projects Completed
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold sm:text-4xl">3+</p>
-                <p className="mt-1 text-sm text-white/60">Core Skills</p>
-              </div>
+            <div className="mt-10 flex flex-col gap-3">
+              {resumeTabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={cn(
+                    "flex items-center justify-between rounded-2xl px-6 py-4 text-left text-lg font-semibold transition-colors",
+                    activeTab === tab.id
+                      ? "bg-[#FB9590] text-black"
+                      : "bg-black text-white hover:bg-black/80",
+                  )}
+                >
+                  {tab.label}
+                  <ArrowUpRight className="size-5 shrink-0" />
+                </button>
+              ))}
             </div>
+          </div>
 
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "w-fit gap-2 rounded-full bg-white px-6 text-black hover:bg-white/85",
+          <div>
+            <h3 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              {activeTabData.heading}
+            </h3>
+            <p className="mt-4 max-w-2xl text-lg text-black/60">
+              {activeTabData.description}
+            </p>
+
+            <div className="mt-10">
+              {activeTab === "experience" && (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {experience.map((item) => (
+                    <div key={item.title} className="rounded-2xl bg-black/5 p-6">
+                      <p className="text-sm text-black/50">{item.period}</p>
+                      <p className="mt-3 flex items-center gap-2 text-sm text-black/60">
+                        <span className="size-1.5 shrink-0 rounded-full bg-[#FB9590]" />
+                        {item.org}
+                      </p>
+                      <p className="mt-2 text-xl font-bold">{item.title}</p>
+                      {item.bullets.length > 0 && (
+                        <ul className="mt-4 flex flex-col gap-2 text-sm text-black/60">
+                          {item.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
-            >
-              Download My Resume
-              <ArrowUpRight className="size-4" />
-            </a>
+
+              {activeTab === "aboutme" && (
+                <div className="flex flex-col gap-6">
+                  <p className="text-xl font-semibold">Frontend Developer</p>
+                  <p className="flex items-center gap-2 text-sm text-black/60">
+                    <GraduationCap className="size-4 shrink-0" />
+                    MIET, Meerut
+                  </p>
+                  <p className="text-lg text-black/70">
+                    Tech Stack -{" "}
+                    <span className="font-semibold text-black">
+                      React, Next.js &amp; TypeScript
+                    </span>
+                  </p>
+                  <p className="max-w-2xl leading-7 text-black/70">
+                    I&apos;m a skilled software developer with experience in
+                    JavaScript, and expertise in frameworks like React,
+                    Node.js, Express.js and MongoDB. I&apos;m a quick
+                    learner and collaborate closely with clients to create
+                    efficient, scalable, and user-friendly solutions that
+                    solve real-world problems. Let&apos;s work together to
+                    bring your ideas to life!
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-6">
+                    <div>
+                      <p className="text-3xl font-semibold sm:text-4xl">1+</p>
+                      <p className="mt-1 text-sm text-black/50">
+                        Years of Experience
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-3xl font-semibold sm:text-4xl">5+</p>
+                      <p className="mt-1 text-sm text-black/50">
+                        Projects Completed
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-3xl font-semibold sm:text-4xl">3+</p>
+                      <p className="mt-1 text-sm text-black/50">Core Skills</p>
+                    </div>
+                  </div>
+
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={cn(
+                      buttonVariants({ size: "lg" }),
+                      "w-fit gap-2 rounded-full bg-black text-white hover:bg-black/80",
+                    )}
+                  >
+                    Download My Resume
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                </div>
+              )}
+
+              {activeTab === "education" && (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {education.map((item) => (
+                    <div key={item.title} className="rounded-2xl bg-black/5 p-6">
+                      <p className="text-sm text-black/50">{item.period}</p>
+                      <p className="mt-3 flex items-center gap-2 text-sm text-black/60">
+                        <span className="size-1.5 shrink-0 rounded-full bg-[#FB9590]" />
+                        {item.org}
+                      </p>
+                      <p className="mt-2 text-xl font-bold">{item.title}</p>
+                      <p className="mt-2 text-sm text-black/60">{item.meta}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {activeTab === "extraSkills" && (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {extraSkillGroups.map((group) => (
+                    <div
+                      key={group.category}
+                      className="rounded-2xl bg-black/5 p-6"
+                    >
+                      <p className="text-lg font-bold">{group.category}</p>
+                      <ul className="mt-3 flex flex-col gap-1.5 text-sm text-black/60">
+                        {group.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {activeTab === "certifications" && (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {certifications.map((item) => (
+                    <div key={item.title} className="rounded-2xl bg-black/5 p-6">
+                      <p className="text-xl font-bold">{item.title}</p>
+                      <p className="mt-2 text-sm text-black/60">{item.issuer}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -316,20 +574,64 @@ export default function Home() {
 
           <div className="mt-16 flex items-center gap-2 text-lg font-semibold">
             Skills
-            <ArrowRight className="size-4" />
+            <ArrowRight className="size-4 text-[#FB9590]" />
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-4">
-            {["Frontend", "Backend", "DevOps", "Databases", "Cloud", "Other"].map(
-              (skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white/90"
-                >
-                  {skill}
+          <div className="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/3 p-4 transition-colors hover:border-[#FB9590]/50 hover:bg-white/5"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${DEVICON}/${skill.icon}`}
+                  alt=""
+                  loading="lazy"
+                  className={cn(
+                    "size-12 transition-transform group-hover:scale-110",
+                    skill.invert && "invert",
+                  )}
+                />
+                <span className="text-center text-sm font-medium text-white/80">
+                  {skill.name}
                 </span>
-              ),
-            )}
+              </div>
+            ))}
+          </div>
+
+          <h3 className="mt-20 flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Tools &amp;
+            <span
+              className="text-[#FB9590] italic"
+              style={{ fontFamily: "var(--font-instrument-serif)" }}
+            >
+              Software
+            </span>
+          </h3>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {tools.map((tool) => (
+              <div
+                key={tool.name}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/3 p-6 transition-colors hover:border-[#FB9590]/50 hover:bg-white/5"
+              >
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                  {tool.icon ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={`${DEVICON}/${tool.icon}`}
+                      alt=""
+                      loading="lazy"
+                      className="size-8"
+                    />
+                  ) : (
+                    <Bot className="size-7 text-[#FB9590]" />
+                  )}
+                </span>
+                <span className="text-lg font-semibold">{tool.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
