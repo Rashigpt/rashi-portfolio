@@ -362,6 +362,110 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="skills" className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+          <div className="flex -space-x-8">
+            <span className="size-20 rounded-full border-2 border-[#FB9590]" />
+            <span className="size-20 rounded-full border-2 border-[#8B5CF6]" />
+          </div>
+
+          <h2 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
+            My Skills
+          </h2>
+
+          <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div>
+              <p className="text-2xl font-bold sm:text-3xl">
+                I build things for the people
+              </p>
+              <p
+                className="mt-2 text-xl text-white/70 italic sm:text-2xl"
+                style={{ fontFamily: "var(--font-instrument-serif)" }}
+              >
+                I can Design, Develop, Deploy
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-6 text-lg leading-8 text-white/80">
+              <p>
+                My go-to stack is Next JS (With TypeScript &amp; SaSS), which
+                was previously known as the MERN Stack for web-based
+                solutions. I have collaborated with developers to create a
+                variety of open-source solutions.
+              </p>
+              <p>
+                I have a thing for making unique user interfaces, so I always
+                design the systems on Figma from scratch and code them using
+                tailwind (did previously using Sass), giving the app a
+                unique new look and better control and customizability.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 flex items-center gap-2 text-lg font-semibold">
+            Skills
+            <ArrowRight className="size-4 text-[#FB9590]" />
+          </div>
+
+          <div className="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/3 p-4 transition-colors hover:border-[#FB9590]/50 hover:bg-white/5"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${DEVICON}/${skill.icon}`}
+                  alt=""
+                  loading="lazy"
+                  className={cn(
+                    "size-12 transition-transform group-hover:scale-110",
+                    skill.invert && "invert",
+                  )}
+                />
+                <span className="text-center text-sm font-medium text-white/80">
+                  {skill.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="mt-20 flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Tools &amp;
+            <span
+              className="text-[#FB9590] italic"
+              style={{ fontFamily: "var(--font-instrument-serif)" }}
+            >
+              Software
+            </span>
+          </h3>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {tools.map((tool) => (
+              <div
+                key={tool.name}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/3 p-6 transition-colors hover:border-[#FB9590]/50 hover:bg-white/5"
+              >
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-white/10">
+                  {tool.icon ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={`${DEVICON}/${tool.icon}`}
+                      alt=""
+                      loading="lazy"
+                      className="size-8"
+                    />
+                  ) : (
+                    <Bot className="size-7 text-[#FB9590]" />
+                  )}
+                </span>
+                <span className="text-lg font-semibold">{tool.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="about" className="border-t border-white/10 bg-white text-black">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-[380px_1fr] lg:px-12">
           <div>
@@ -528,110 +632,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills" className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
-          <div className="flex -space-x-8">
-            <span className="size-20 rounded-full border-2 border-[#FB9590]" />
-            <span className="size-20 rounded-full border-2 border-[#8B5CF6]" />
-          </div>
-
-          <h2 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
-            My Skills
-          </h2>
-
-          <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <div>
-              <p className="text-2xl font-bold sm:text-3xl">
-                I build things for the people
-              </p>
-              <p
-                className="mt-2 text-xl text-white/70 italic sm:text-2xl"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
-              >
-                I can Design, Develop, Deploy
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-6 text-lg leading-8 text-white/80">
-              <p>
-                My go-to stack is Next JS (With TypeScript &amp; SaSS), which
-                was previously known as the MERN Stack for web-based
-                solutions. I have collaborated with developers to create a
-                variety of open-source solutions.
-              </p>
-              <p>
-                I have a thing for making unique user interfaces, so I always
-                design the systems on Figma from scratch and code them using
-                tailwind (did previously using Sass), giving the app a
-                unique new look and better control and customizability.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-16 flex items-center gap-2 text-lg font-semibold">
-            Skills
-            <ArrowRight className="size-4 text-[#FB9590]" />
-          </div>
-
-          <div className="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
-            {skills.map((skill) => (
-              <div
-                key={skill.name}
-                className="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/3 p-4 transition-colors hover:border-[#FB9590]/50 hover:bg-white/5"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`${DEVICON}/${skill.icon}`}
-                  alt=""
-                  loading="lazy"
-                  className={cn(
-                    "size-12 transition-transform group-hover:scale-110",
-                    skill.invert && "invert",
-                  )}
-                />
-                <span className="text-center text-sm font-medium text-white/80">
-                  {skill.name}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="mt-20 flex items-center gap-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Tools &amp;
-            <span
-              className="text-[#FB9590] italic"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
-            >
-              Software
-            </span>
-          </h3>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {tools.map((tool) => (
-              <div
-                key={tool.name}
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/3 p-6 transition-colors hover:border-[#FB9590]/50 hover:bg-white/5"
-              >
-                <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-white/10">
-                  {tool.icon ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={`${DEVICON}/${tool.icon}`}
-                      alt=""
-                      loading="lazy"
-                      className="size-8"
-                    />
-                  ) : (
-                    <Bot className="size-7 text-[#FB9590]" />
-                  )}
-                </span>
-                <span className="text-lg font-semibold">{tool.name}</span>
-              </div>
-            ))}
           </div>
         </div>
       </section>
