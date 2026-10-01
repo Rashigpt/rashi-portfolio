@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  ArrowLeft,
   ArrowRight,
   ArrowUp,
   ArrowUpRight,
@@ -193,6 +194,65 @@ const resumeTabs = [
 
 type ResumeTabId = (typeof resumeTabs)[number]["id"];
 
+const projects = [
+  {
+    label: "Project 01",
+    name: "NewsPulse",
+    tagline: "News Web Application",
+    tech: "React.js, Bootstrap, RESTful API, Git",
+    live: null as string | null,
+    liveLabel: null as string | null,
+    highlights: null as string[] | null,
+    description: null as string | null,
+    bullets: [
+      "Architected and built a fully responsive React.js news app with reusable component structure, integrating a live RESTful News API with dynamic category filters and pagination.",
+      "Implemented React Hooks (useState, useEffect) for efficient state management and applied lazy loading and response caching to significantly improve load performance.",
+      "Delivered a mobile-first, cross-device compatible UI using Bootstrap; deployed production build via GitHub with accessibility best practices.",
+    ] as string[] | null,
+  },
+  {
+    label: "Project 02",
+    name: "DigiMate",
+    tagline: "Digital Marketing Services Webpage",
+    tech: "HTML5, CSS3, Vanilla JavaScript",
+    live: null as string | null,
+    liveLabel: null as string | null,
+    highlights: null as string[] | null,
+    description: null as string | null,
+    bullets: [
+      "Designed and developed a fully responsive, conversion-optimized agency landing page featuring a multi-section layout: services, pricing, testimonials, and multi-channel contact.",
+      "Engineered scroll-triggered animations using the IntersectionObserver API and smooth count-up number effects via requestAnimationFrame — achieving 60fps performance with zero library dependency.",
+      "Demonstrated strong CSS layout skills (Flexbox, Grid) and deep JavaScript DOM manipulation without any framework, showcasing solid fundamentals.",
+    ] as string[] | null,
+  },
+  {
+    label: "Project 03",
+    name: "WhatDidDocSay",
+    tagline: null as string | null,
+    tech: null as string | null,
+    live: null as string | null,
+    liveLabel: "Live (coming soon)",
+    highlights: [
+      "Turn Medical Confusion Into Clarity",
+      "Voice-First, Any Language, Zero Learning Curve",
+    ] as string[] | null,
+    description:
+      "WhatDidDocSay is a web and WhatsApp-based application that simplifies medical reports and prescriptions into plain, easy-to-understand language. Users can upload or send a photo of their report to instantly receive a simplified explanation — translated into their native language and read aloud for those who can't read. With a focus on accessibility for the elderly, illiterate, and non-English-speaking populations, WhatDidDocSay aims to close the gap between receiving medical information and actually understanding it.",
+    bullets: null as string[] | null,
+  },
+  {
+    label: "Project 04",
+    name: null as string | null,
+    tagline: null as string | null,
+    tech: null as string | null,
+    live: null as string | null,
+    liveLabel: null as string | null,
+    highlights: null as string[] | null,
+    description: null as string | null,
+    bullets: null as string[] | null,
+  },
+];
+
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
@@ -212,6 +272,8 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function Home() {
   const [activeTab, setActiveTab] = useState<ResumeTabId>("experience");
   const activeTabData = resumeTabs.find((tab) => tab.id === activeTab)!;
+  const [activeProject, setActiveProject] = useState(0);
+  const currentProject = projects[activeProject];
 
   return (
     <div
@@ -467,6 +529,161 @@ export default function Home() {
                 <span className="text-lg font-semibold">{tool.name}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+          <span className="text-sm font-medium tracking-wide text-[#FFBB94] uppercase">
+            Projects
+          </span>
+          <h2 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
+            <span className="mr-1 inline-flex size-10 items-center justify-center rounded-full bg-[#FB9590] text-2xl font-bold text-black">
+              M
+            </span>
+            y Projects
+          </h2>
+
+          <div className="mt-16 flex items-center justify-center gap-4 sm:gap-8">
+            <button
+              type="button"
+              onClick={() =>
+                setActiveProject(
+                  (i) => (i - 1 + projects.length) % projects.length,
+                )
+              }
+              aria-label="Previous project"
+              className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/40 hover:text-white"
+            >
+              <ArrowLeft className="size-5" />
+            </button>
+
+            <div className="relative w-full max-w-3xl pb-14 sm:pb-20">
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+                  <span className="size-2.5 rounded-full bg-white/15" />
+                  <span className="size-2.5 rounded-full bg-white/15" />
+                  <span className="size-2.5 rounded-full bg-white/15" />
+                </div>
+                <div aria-hidden className="aspect-video w-full bg-white/5" />
+              </div>
+
+              <div className="absolute top-10 -right-4 w-28 overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-xl sm:-right-8 sm:w-36 lg:-right-12 lg:w-44">
+                <div
+                  aria-hidden
+                  className="aspect-9/19 w-full bg-white/5"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() =>
+                setActiveProject((i) => (i + 1) % projects.length)
+              }
+              aria-label="Next project"
+              className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/40 hover:text-white"
+            >
+              <ArrowRight className="size-5" />
+            </button>
+          </div>
+
+          <div className="mx-auto mt-8 grid max-w-xl grid-cols-4 gap-4 sm:gap-6">
+            {projects.map((project, index) => (
+              <button
+                key={project.label}
+                type="button"
+                onClick={() => setActiveProject(index)}
+                aria-label={project.label}
+                className={cn(
+                  "relative overflow-hidden rounded-xl border bg-white/5 transition-colors",
+                  activeProject === index
+                    ? "border-[#FB9590]"
+                    : "border-white/10 hover:border-white/25",
+                )}
+              >
+                <div aria-hidden className="aspect-video w-full bg-white/5" />
+                <span
+                  className={cn(
+                    "absolute bottom-2 left-2 flex size-6 items-center justify-center rounded-md text-xs font-semibold",
+                    activeProject === index
+                      ? "bg-[#FB9590] text-black"
+                      : "bg-black/70 text-white",
+                  )}
+                >
+                  {index + 1}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 gap-10 border-t border-white/10 pt-12 lg:grid-cols-[340px_1fr]">
+            <div>
+              <div className="flex flex-wrap items-center gap-4">
+                <h3
+                  className="text-3xl text-white italic sm:text-4xl"
+                  style={{ fontFamily: "var(--font-instrument-serif)" }}
+                >
+                  {currentProject.name ?? "Coming Soon"}
+                </h3>
+
+                {currentProject.live ? (
+                  <a
+                    href={currentProject.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-1.5 rounded-full border border-[#FB9590] px-4 py-1.5 text-sm font-semibold text-[#FB9590] transition-colors hover:bg-[#FB9590] hover:text-black"
+                  >
+                    Live
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                ) : currentProject.liveLabel ? (
+                  <span className="rounded-full border border-white/20 px-4 py-1.5 text-sm font-semibold text-white/50">
+                    {currentProject.liveLabel}
+                  </span>
+                ) : null}
+              </div>
+
+              {currentProject.tagline && (
+                <p className="mt-2 text-white/60">{currentProject.tagline}</p>
+              )}
+
+              {currentProject.highlights && (
+                <div className="mt-8 flex flex-col divide-y divide-white/10 border-t border-white/10">
+                  {currentProject.highlights.map((highlight) => (
+                    <p key={highlight} className="py-4 text-lg font-semibold">
+                      {highlight}
+                    </p>
+                  ))}
+                </div>
+              )}
+
+              {currentProject.tech && (
+                <p className="mt-8 text-sm text-white/50">
+                  {currentProject.tech}
+                </p>
+              )}
+            </div>
+
+            <div className="text-lg leading-8 text-white/70">
+              {currentProject.description && <p>{currentProject.description}</p>}
+
+              {currentProject.bullets && (
+                <ul className="flex flex-col gap-4">
+                  {currentProject.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3">
+                      <span className="mt-3 size-1.5 shrink-0 rounded-full bg-[#FB9590]" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {!currentProject.description && !currentProject.bullets && (
+                <p className="text-white/40">More details coming soon.</p>
+              )}
+            </div>
           </div>
         </div>
       </section>
