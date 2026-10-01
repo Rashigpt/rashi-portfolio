@@ -256,6 +256,8 @@ export default function Home() {
 
             <span className="text-[#FB9590]">◆</span>
             <span>Code, Implement, Design &amp;</span>
+            <span className="text-[#FB9590]">◆</span>
+            <span>Code, Implement, Design &amp;</span>
                 
             <span
               className="lowercase text-white italic"
