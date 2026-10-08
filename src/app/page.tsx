@@ -328,8 +328,7 @@ export default function Home() {
           <h1 className="text-5xl leading-[1.1] font-semibold tracking-tight sm:text-6xl lg:text-7xl">
             <span className="block">Building interfaces</span>
             <span className="block">that feel effortless,productive</span>
-            <span className="block">Building interfaces</span>
-            <span className="block">that feel effortless,productive</span>
+            
             <span
               className="block text-[#FB9590] italic"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
